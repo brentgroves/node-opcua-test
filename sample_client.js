@@ -18,6 +18,7 @@ async.series([
 
     // step 1 : connect to
     function(callback)  {
+        debugger;
         client.connect(endpointUrl, function (err) {
             if(err) {
                 console.log(" cannot connect to endpoint :" , endpointUrl );
@@ -30,6 +31,7 @@ async.series([
 
     // step 2 : createSession
     function(callback) {
+        debugger;
         client.createSession( function(err, session) {
             if(err) {
                 return callback(err);
@@ -41,6 +43,7 @@ async.series([
     
     // step 3 : browse
     function(callback) {
+       debugger;
        the_session.browse("RootFolder", function(err, browseResult) {
            if(!err) {
                console.log("Browsing rootfolder: ");
@@ -54,6 +57,7 @@ async.series([
 
     // step 4 : read a variable with readVariableValue
     function(callback) {
+        debugger;
        the_session.readVariableValue("ns=1;s=free_memory", function(err, dataValue) {
            if (!err) {
                console.log(" free mem % = " , dataValue.toString());
@@ -64,6 +68,7 @@ async.series([
     
     // step 4' : read a variable with read
     function(callback) {
+       debugger;
        const maxAge = 0;
        const nodeToRead = { nodeId: "ns=1;s=free_memory", attributeId: opcua.AttributeIds.Value };
        
@@ -77,6 +82,7 @@ async.series([
     
     // step 5: install a subscription and install a monitored item for 10 seconds
     function(callback) {
+       debugger;
        const subscriptionOptions = {
            maxNotificationsPerPublish: 1000,
            publishingEnabled: true,
@@ -85,7 +91,7 @@ async.series([
            requestedPublishingInterval: 1000
        };
        the_session.createSubscription2(subscriptionOptions, (err, subscription) => {
-       
+           debugger;
            if(err) { return callback(err); }
        
            the_subscription = subscription;
@@ -101,7 +107,8 @@ async.series([
        });
     },
     function(callback) {
-       // install monitored item
+       // install monitored itemi
+       debugger;
        const monitoredItem  = the_subscription.monitor({
                nodeId: opcua.resolveNodeId("ns=1;s=free_memory"),
                attributeId: opcua.AttributeIds.Value
