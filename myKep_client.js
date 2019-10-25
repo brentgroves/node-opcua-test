@@ -14,10 +14,9 @@ const endpointUrl =
 // const nodeId = 'ns=1;s=Temperature';
 // const nodeId = 'ns=1;s=free_memory';
 const nid = [
-"ns=2;s=CNC103.CNC103.CNC103.PartCounter",
-"ns=2;s=CNC360.CNC360.CNC360.PartCounter",
+"ns=2;s=CNC360.CNC360.Cycle_Counter_Shift_SL",
 "ns=2;s=CNC362.CNC362.Cycle_Counter_Shift_SL",
-    "ns=2;s=CNC422.CNC422.CNC422.PartCounter"
+"ns=2;s=CNC422.CNC422.Cycle_Counter_Shift_SL",
     // "ns=2;s=CNC289.CNC289.Axes(Maxes1).Linear(Mx1).X1actm",
     // "ns=2;s=CNC289.CNC289.Axes(Maxes1).Rotary(Mc1).S1load"
 ];
@@ -103,7 +102,7 @@ async function main() {
         queueSize: 1,
         discardOldest: true,
       },
-      opcua.TimestampsToReturn.Neither,
+      opcua.TimestampsToReturn.Both,
     );
           monitoredItem.push(mi);
     monitoredItem[i].on('changed', dataValue =>
